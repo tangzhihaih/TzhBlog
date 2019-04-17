@@ -1,0 +1,16 @@
+com\chinasofti\framework\ssmdemo\model\Book.class
+com\chinasofti\framework\ssmdemo\service\impl\ProductServiceImpl.class
+com\chinasofti\framework\ssmdemo\dao\UserDAO.class
+com\chinasofti\framework\ssmdemo\web\reProductController.class
+com\chinasofti\framework\ssmdemo\dao\ProductDAO.class
+com\chinasofti\framework\ssmdemo\model\Category.class
+com\chinasofti\framework\ssmdemo\model\Booka.class
+com\chinasofti\framework\ssmdemo\junit\Test.class
+com\chinasofti\framework\ssmdemo\web\UserController.class
+com\chinasofti\framework\ssmdemo\service\ProductService.class
+com\chinasofti\framework\ssmdemo\model\User.class
+com\chinasofti\framework\ssmdemo\model\Message.class
+com\chinasofti\framework\ssmdemo\service\UserService.class
+com\chinasofti\framework\ssmdemo\model\Total.class
+com\chinasofti\framework\ssmdemo\service\impl\UserServiceImpl.class
+com\chinasofti\framework\ssmdemo\web\ProductController.class

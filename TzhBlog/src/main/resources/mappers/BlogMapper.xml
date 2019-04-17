@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.blog.Dao.blogDao">
+    <resultMap id="selectArticel" type="com.tang.blog.Unity.Article">
+        <result column="article_id" jdbcType="INTEGER" property="article_id"></result>
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="visit_count" jdbcType="INTEGER" property="visit_count"></result>
+        <result column="follow_type" jdbcType="INTEGER" property="follow_type"></result>
+        <result column="write_time" jdbcType="TIMESTAMP" property="write_time"></result>
+        <result column="content" jdbcType="VARCHAR" property="content"></result>
+        <result column="label" jdbcType="VARCHAR" property="label"></result>
+        <result column="sort" jdbcType="VARCHAR" property="sort"></result>
+        <result column="type" jdbcType="VARCHAR" property="type"></result>
+        <result column="blog_sort" jdbcType="VARCHAR" property="blog_sort"></result>
+        <result column="is_private" jdbcType="VARCHAR" property="is_private"></result>
+        <result column="article_name" jdbcType="VARCHAR" property="article_name"></result>
+
+        <collection property="user" ofType="com.tang.blog.Unity.User">
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="username" jdbcType="VARCHAR" property="username"></result>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+            <result column="password" jdbcType="VARCHAR" property="password"></result>
+            <result column="truename" jdbcType="VARCHAR" property="truename"></result>
+            <result column="age" jdbcType="VARCHAR" property="age"></result>
+            <result column="birthday" jdbcType="VARCHAR" property="birthday"></result>
+            <result column="job" jdbcType="VARCHAR" property="job"></result>
+            <result column="sex" jdbcType="VARCHAR" property="sex"></result>
+            <result column="work" jdbcType="VARCHAR" property="work"></result>
+            <result column="place" jdbcType="VARCHAR" property="place"></result>
+            <result column="remark" jdbcType="VARCHAR" property="remark"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="follow_result" type="com.tang.blog.Unity.Follow">
+        <result column="type" jdbcType="INTEGER" property="type"></result>
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="follow_id" jdbcType="INTEGER" property="follow_id"></result>
+        <result column="by_follow_id" jdbcType="INTEGER" property="by_follow_id"></result>
+
+        <collection property="user" ofType="com.tang.blog.Unity.User">
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="username" jdbcType="VARCHAR" property="username"></result>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+            <result column="password" jdbcType="VARCHAR" property="password"></result>
+            <result column="truename" jdbcType="VARCHAR" property="truename"></result>
+            <result column="age" jdbcType="VARCHAR" property="age"></result>
+            <result column="birthday" jdbcType="VARCHAR" property="birthday"></result>
+            <result column="job" jdbcType="VARCHAR" property="job"></result>
+            <result column="sex" jdbcType="VARCHAR" property="sex"></result>
+            <result column="work" jdbcType="VARCHAR" property="work"></result>
+            <result column="place" jdbcType="VARCHAR" property="place"></result>
+            <result column="remark" jdbcType="VARCHAR" property="remark"></result>
+        </collection>
+
+        <collection property="img" ofType="com.tang.blog.Unity.Img">
+            <result column="img_name" jdbcType="VARCHAR" property="img_name"></result>
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="img_id" jdbcType="INTEGER" property="img_id"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="storage_result" type="com.tang.blog.Unity.Storage">
+        <result column="user_id" jdbcType="INTEGER" property="user_id"></result>
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="article_id" jdbcType="INTEGER" property="article_id"></result>
+        <result column="storage_time" jdbcType="TIMESTAMP" property="storage_time"></result>
+
+        <collection property="user" ofType="com.tang.blog.Unity.User">
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="username" jdbcType="VARCHAR" property="username"></result>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+            <result column="password" jdbcType="VARCHAR" property="password"></result>
+            <result column="truename" jdbcType="VARCHAR" property="truename"></result>
+            <result column="age" jdbcType="VARCHAR" property="age"></result>
+            <result column="birthday" jdbcType="VARCHAR" property="birthday"></result>
+            <result column="job" jdbcType="VARCHAR" property="job"></result>
+            <result column="sex" jdbcType="VARCHAR" property="sex"></result>
+            <result column="work" jdbcType="VARCHAR" property="work"></result>
+            <result column="place" jdbcType="VARCHAR" property="place"></result>
+            <result column="remark" jdbcType="VARCHAR" property="remark"></result>
+        </collection>
+        <collection property="article" ofType="com.tang.blog.Unity.Article">
+            <result column="article_id" jdbcType="INTEGER" property="article_id"></result>
+            <result column="visit_count" jdbcType="INTEGER" property="visit_count"></result>
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="follow_type" jdbcType="INTEGER" property="follow_type"></result>
+            <result column="write_time" jdbcType="TIMESTAMP" property="write_time"></result>
+            <result column="content" jdbcType="VARCHAR" property="content"></result>
+            <result column="label" jdbcType="VARCHAR" property="label"></result>
+            <result column="sort" jdbcType="VARCHAR" property="sort"></result>
+            <result column="type" jdbcType="VARCHAR" property="type"></result>
+            <result column="blog_sort" jdbcType="VARCHAR" property="blog_sort"></result>
+            <result column="is_private" jdbcType="VARCHAR" property="is_private"></result>
+            <result column="article_name" jdbcType="VARCHAR" property="article_name"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="img_result" type="com.tang.blog.Unity.Img">
+        <result column="img_name" jdbcType="VARCHAR" property="img_name"></result>
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="img_id" jdbcType="INTEGER" property="img_id"></result>
+    </resultMap>
+
+    <resultMap id="grade_result" type="com.tang.blog.Unity.Grade">
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="grade" jdbcType="VARCHAR" property="grade"></result>
+        <result column="score" jdbcType="INTEGER" property="score"></result>
+
+
+        <collection property="user" ofType="com.tang.blog.Unity.User">
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="username" jdbcType="VARCHAR" property="username"></result>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+            <result column="truename" jdbcType="VARCHAR" property="truename"></result>
+            <result column="job" jdbcType="VARCHAR" property="job"></result>
+            <result column="work" jdbcType="VARCHAR" property="work"></result>
+            <result column="place" jdbcType="VARCHAR" property="place"></result>
+            <result column="remark" jdbcType="VARCHAR" property="remark"></result>
+        </collection>
+
+        <collection property="img" ofType="com.tang.blog.Unity.Img">
+            <result column="img_name" jdbcType="VARCHAR" property="img_name"></result>
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="img_id" jdbcType="INTEGER" property="img_id"></result>
+        </collection>
+    </resultMap>
+    <resultMap id="note_result" type="com.tang.blog.Unity.Note">
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="note_id" jdbcType="INTEGER" property="note_id"></result>
+        <result column="write_time" jdbcType="TIMESTAMP" property="write_time"></result>
+        <result column="note_score" jdbcType="INTEGER" property="note_score"></result>
+        <result column="finish" jdbcType="INTEGER" property="finish"></result>
+        <result column="note_title" jdbcType="VARCHAR" property="note_title"></result>
+        <result column="note_mark" jdbcType="VARCHAR" property="note_mark"></result>
+        <result column="note_markt" jdbcType="VARCHAR" property="note_markt"></result>
+        <result column="note_content" jdbcType="VARCHAR" property="note_content"></result>
+
+        <collection property="user" ofType="com.tang.blog.Unity.User">
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="username" jdbcType="VARCHAR" property="username"></result>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+            <result column="truename" jdbcType="VARCHAR" property="truename"></result>
+            <result column="job" jdbcType="VARCHAR" property="job"></result>
+            <result column="work" jdbcType="VARCHAR" property="work"></result>
+            <result column="place" jdbcType="VARCHAR" property="place"></result>
+            <result column="remark" jdbcType="VARCHAR" property="remark"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="visit_result" type="com.tang.blog.Unity.Visit">
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="visit_count" jdbcType="VARCHAR" property="visit_count"></result>
+        <result column="by_visitusername" jdbcType="VARCHAR" property="by_visitusername"></result>
+        <result column="article_id" jdbcType="INTEGER" property="article_id"></result>
+    </resultMap>
+
+    <resultMap id="answer_result" type="com.tang.blog.Unity.Answer">
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="content" jdbcType="VARCHAR" property="content"></result>
+        <result column="note_id" jdbcType="INTEGER" property="note_id"></result>
+        <result column="write_time" jdbcType="VARCHAR" property="write_time"></result>
+
+        <collection property="user" ofType="com.tang.blog.Unity.User">
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="username" jdbcType="VARCHAR" property="username"></result>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+            <result column="truename" jdbcType="VARCHAR" property="truename"></result>
+            <result column="job" jdbcType="VARCHAR" property="job"></result>
+            <result column="work" jdbcType="VARCHAR" property="work"></result>
+            <result column="place" jdbcType="VARCHAR" property="place"></result>
+            <result column="remark" jdbcType="VARCHAR" property="remark"></result>
+        </collection>
+        <collection property="note" ofType="com.tang.blog.Unity.Note">
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="write_time" jdbcType="TIMESTAMP" property="write_time"></result>
+            <result column="note_score" jdbcType="INTEGER" property="note_score"></result>
+            <result column="finish" jdbcType="INTEGER" property="finish"></result>
+            <result column="note_title" jdbcType="VARCHAR" property="note_title"></result>
+            <result column="note_mark" jdbcType="VARCHAR" property="note_mark"></result>
+            <result column="note_markt" jdbcType="VARCHAR" property="note_markt"></result>
+            <result column="note_content" jdbcType="VARCHAR" property="note_content"></result>
+        </collection>
+    </resultMap>
+
+
+    <select id="SelectAllAricle" resultMap="selectArticel">
+        SELECT * FROM article,`user` WHERE article_id=#{article_id} AND article.`article_id`=user.`id`
+
+    </select>
+
+    <delete id="deleteBlogById" parameterType="com.tang.blog.Unity.Article">
+        DELETE from article where id=#{id}
+    </delete>
+
+    <select id="SelectOneArticleContent" resultType="String">
+        select content from article where id=#{id}
+    </select>
+
+    <select id="SelectAricleOne" resultMap="selectArticel">
+        select * from article where id=#{id}
+    </select>
+    
+    <select id="SelectAllAricleByTime" resultMap="selectArticel">
+        select * from article WHERE username=#{username} GROUP by write_time;
+    </select>
+
+    <select id="SelectAll" resultMap="selectArticel">
+        SELECT  user.`remark`,user.`nickname`,user.`place`,article.`article_name`,article.article_id,article.id,
+            user.`username`,article.`blog_sort`,article.`write_time`
+        FROM article,`user` WHERE  user.`id`=article.`article_id`;
+    </select>
+
+    <select id="SelectIsExistFollow" resultType="INTEGER">
+        SELECT COUNT(id) FROM follow WHERE follow_id IN(SELECT id FROM USER WHERE user.`username`=#{username} AND
+        by_follow_id IN(SELECT id FROM USER WHERE user.`username`=#{follow_username}))
+    </select>
+
+    <insert id="insertFollow" parameterType="com.tang.blog.Unity.Follow">
+        INSERT into follow(by_follow_id,follow_id)
+        VALUES (#{by_follow_id,jdbcType=INTEGER},#{follow_id,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectName" resultType="com.tang.blog.Unity.User">
+        SELECT  *from user where username=#{username}
+    </select>
+
+    <select id="seleclHasFollow" resultMap="follow_result">
+        SELECT *FROM img,`user`,follow WHERE follow.follow_id=#{follow_id} AND
+                                             follow.`by_follow_id`=user.`id`AND user.`id`=img.`img_id`
+
+    </select>
+
+    <delete id="deleteHasFollow" parameterType="com.tang.blog.Unity.Follow">
+        DELETE FROM follow WHERE follow_id IN(SELECT id FROM USER WHERE user.`username`=#{username} AND
+                                 by_follow_id IN(SELECT id FROM USER WHERE user.`username`=#{follow_username}))
+    </delete>
+
+    <select id="seleclAllStorage" resultMap="storage_result">
+        SELECT * FROM `storage`,article,`user` WHERE user.`username`=#{username} AND  storage.`article_id`=article.`id`
+    </select>
+
+    <insert id="insertStorage" parameterType="com.tang.blog.Unity.Storage">
+        INSERT INTO storage(article_id,user_id)
+                VALUES (#{article_id},#{user_id})
+    </insert>
+
+    <select id="seleclOneStorage" resultType="INTEGER">
+        SELECT  LAST_INSERT_ID()
+    </select>
+
+    <delete id="deleteStorageById" parameterType="com.tang.blog.Unity.Storage">
+        DELETE FROM storage where id=#{id}
+    </delete>
+
+    <select id="seleclOneId" resultType="INTEGER">
+        SELECT count(id) from storage where article_id=#{id}
+    </select>
+
+    <select id="seleclAllImg" resultMap="img_result">
+        SELECT * from hp_img ORDER BY id
+    </select>
+
+    <select id="selectOneGrade" resultMap="grade_result">
+        SELECT * FROM grade,USER,img WHERE user.username &lt;&gt;#{username}
+         AND img.`img_id`=user.`id` AND grade.`grade_id`=user.`id`
+        ORDER BY grade.`grade` DESC LIMIT 6
+    </select>
+
+    <select id="selectGradeOne" resultMap="grade_result">
+        SELECT * FROM grade WHERE grade.`grade_id` IN (SELECT user.`id` FROM
+            USER WHERE user.`username`=#{username})
+    </select>
+
+    <update id="updateScore" parameterType="com.tang.blog.Unity.Grade">
+        UPDATE grade set score=#{grade} where grade_id in(SELECT user.id
+                                                          from user where user.username=#{username})
+    </update>
+
+    <insert id="insertOneNote" parameterType="com.tang.blog.Unity.Note">
+        INSERT into note(note_title,note_content,note_mark,note_markt,note_score,note_id)
+                VALUES (#{note_title},#{note_content},#{note_mark},#{note_mark2},#{publish_score},#{note_id})
+    </insert>
+
+    <delete id="deleteLastNote" parameterType="com.tang.blog.Unity.Note">
+        DELETE  FROM note WHERE note.id NOT IN(
+            SELECT t.id FROM(
+                      SELECT MAX(note.id) AS id FROM note
+                            ) AS t
+        )
+    </delete>
+
+    <update id="updateVisitCount" parameterType="com.tang.blog.Unity.Visit">
+        UPDATE article SET article.`visit_count`=article.`visit_count`+1
+        WHERE article.`id`=#{article_id}
+    </update>
+
+    <select id="seleclVisitCount" resultType="INTEGER">
+        SELECT SUM(article.`visit_count`) FROM article WHERE article.`article_id` IN (SELECT id FROM `user`
+        WHERE username=#{username})
+    </select>
+
+    <select id="seleclOrginalCount" resultType="INTEGER">
+        SELECT COUNT(article.`id`) FROM article WHERE article.`sort`='原创' AND article.`article_id` IN
+         (SELECT id FROM `user` WHERE username=#{username})
+    </select>
+
+    <select id="seleclCount" resultType="INTEGER">
+        SELECT b.rownum FROM
+            (
+                SELECT t.*, @rownum := @rownum + 1 AS rownum
+                FROM (SELECT @rownum := 0) r,
+                    (SELECT * FROM grade ORDER BY score DESC) AS t
+            ) AS b WHERE b.grade_id = #{username}
+    </select>
+
+    <select id="seleclLikeCount" resultType="INTEGER">
+        SELECT COUNT(*) FROM `like` WHERE byuser=#{username}
+    </select>
+
+    <select id="seleclPerNote" resultMap="note_result">
+        SELECT * FROM note WHERE note.`note_id` IN(SELECT
+        user.`id` FROM USER WHERE user.`username`=#{username})
+    </select>
+
+    <select id="seleclFinishCount" resultType="INTEGER">
+        SELECT COUNT(note.`id`) FROM note WHERE username=#{username}
+        AND finish=#{finish}
+    </select>
+
+    <select id="SelectAllAricleByviewCount" resultMap="selectArticel">
+        SELECT * FROM article WHERE username=#{username} ORDER BY visit_count DESC
+    </select>
+
+    <select id="seleclAllNote" resultMap="note_result">
+        SELECT * FROM note,USER WHERE note.`note_id`=user.`id`
+    </select>
+
+    <select id="seleclAllNotes" resultMap="note_result">
+        SELECT * FROM note,USER WHERE finish=#{finish} AND note.`note_id`=user.`id`
+    </select>
+
+    <select id="selectOneNoteById" resultMap="note_result">
+        SELECT *from note where id=#{id}
+    </select>
+
+    <insert id="insertAnswer" parameterType="com.tang.blog.Unity.Answer">
+        INSERT into answer(note_id,user_id,content)
+                VALUES (#{note_id},#{user_id},#{content})
+    </insert>
+
+    <select id="seleclAllNoteByName" resultMap="note_result">
+        SELECT *FROM note,USER WHERE note.`note_id` IN(SELECT USER.`id`
+        FROM USER WHERE user.`username`=#{username})
+                                     AND user.`id` IN (SELECT USER.`id`
+        FROM USER WHERE user.`username`=#{username})
+    </select>
+
+    <select id="seleclAllAnswerById" resultMap="answer_result">
+        SELECT *FROM answer,note,`user` WHERE note.`id`=#{id}
+        AND note.`note_id`=user.`id` and answer.note_id=note.id
+    </select>
+
+    <select id="selectScoreByGrade" parameterType="com.tang.blog.Unity.Score">
+        SELECT score.`score` FROM score WHERE grade=#{grade}
+    </select>
+
+    <update id="updateScoreByName" parameterType="com.tang.blog.Unity.Grade">
+        UPDATE grade set score=#{grade} where username=#{username}
+    </update>
+
+    <select id="selectMaxGrade" resultType="INTEGER">
+        SELECT MAX(score.`grade`) FROM score WHERE score&lt;#{score}
+    </select>
+
+    <update id="updateGrade" parameterType="com.tang.blog.Unity.Grade">
+        UPDATE grade SET grade='1', score='4' WHERE grade.`grade_id`  IN(
+            SELECT user.`id`  FROM USER WHERE user.`username`=#{username}
+        )
+    </update>
+
+    <select id="selectMinGrade" resultType="INTEGER">
+        SELECT MIN(score.`grade`) FROM score WHERE score>#{score}
+    </select>
+
+    <update id="updateFinish" parameterType="com.tang.blog.Unity.Note">
+        UPDATE note set finish='1' where id=#{id}
+    </update>
+
+    <delete id="deleteNoteById" parameterType="com.tang.blog.Unity.Note">
+        DELETE  from note where note.id=#{id}
+    </delete>
+
+    <select id="selecltStorageId" resultType="INTEGER">
+        SELECT storage.id from storage where article_id=#{article_id} and user_id=#{user_id}
+    </select>
+
+    <select id="seleclOneStorageById" resultMap="storage_result">
+        SELECT *from storage where id=#{id}
+    </select>
+
+    <select id="SelectIsExistStorage" resultType="INTEGER">
+        SELECT count(storage.id) from storage where article_id=#{article_id} and user_id=#{user_id}
+    </select>
+</mapper>

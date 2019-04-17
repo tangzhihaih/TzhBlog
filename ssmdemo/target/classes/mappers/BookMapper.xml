@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chinasofti.framework.ssmdemo.dao.ProductDAO">
+    <insert id="insert" parameterType="book">
+        INSERT INTO product(name,subTitle,originalPrice,stock)
+        VALUES (#{name},#{subTitle},#{originalPrice},#{stock})
+    </insert>
+    <select id="findProductList" resultType="com.chinasofti.framework.ssmdemo.model.Booka">
+        SELECT * FROM products WHERE boo_id=0
+    </select>
+    <select id="findUpProductList" resultType="com.chinasofti.framework.ssmdemo.model.Booka">
+        SELECT * FROM products where boo_id=1
+    </select>
+    <update id="updateRemove" parameterType="int">
+        UPDATE products SET boo_id=0 WHERE boo_id=1
+    </update>
+    <insert id="SortAdProduct" parameterType="String">
+        INSERT INTO category(name)
+        VALUES (#{name})
+    </insert>
+
+    <update id="updateRemoveOpreatio" parameterType="int">/*里面是传过来参数的属性*/
+        UPDATE products set boo_id=0 WHERE id=#{id}
+    </update>
+
+    <update id="updateAddOpreatio" parameterType="int">
+        UPDATE products set boo_id=1 WHERE id=#{add_id}
+   </update>
+
+    <select id="fingTotalCount" resultType="int">
+        select count(*) from products where boo_id=#{id}
+    </select>
+
+    <insert id="PublishM" parameterType="String">
+        INSERT  into message(message,createTime)
+        VALUES (#{message},#{nowDate})
+    </insert>
+
+</mapper>
+

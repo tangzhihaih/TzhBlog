@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.blog.Dao.loginDao">
+    <resultMap id="lo" type="com.tang.blog.Unity.User">
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="username" jdbcType="VARCHAR" property="username"></result>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+        <result column="password" jdbcType="VARCHAR" property="password"></result>
+        <result column="truename" jdbcType="VARCHAR" property="truename"></result>
+        <result column="age" jdbcType="VARCHAR" property="age"></result>
+        <result column="birthday" jdbcType="VARCHAR" property="birthday"></result>
+        <result column="job" jdbcType="VARCHAR" property="job"></result>
+        <result column="sex" jdbcType="VARCHAR" property="sex"></result>
+        <result column="work" jdbcType="VARCHAR" property="work"></result>
+        <result column="place" jdbcType="VARCHAR" property="place"></result>
+        <result column="remark" jdbcType="VARCHAR" property="remark"></result>
+    </resultMap>
+
+    <resultMap id="Article_result" type="com.tang.blog.Unity.Article">
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="article_id" jdbcType="INTEGER" property="article_id"></result>
+        <result column="write_time" jdbcType="TIMESTAMP" property="write_time"></result>
+        <result column="visit_count" jdbcType="INTEGER" property="visit_count"></result>
+        <result column="article_name" jdbcType="VARCHAR" property="article_name"></result>
+        <result column="content" jdbcType="VARCHAR" property="content"></result>
+        <result column="label" jdbcType="VARCHAR" property="label"></result>
+        <result column="sort" jdbcType="VARCHAR" property="sort"></result>
+        <result column="blog_sort" jdbcType="VARCHAR" property="blog_sort"></result>
+        <result column="is_private" jdbcType="VARCHAR" property="is_private"></result>
+    </resultMap>
+
+    <resultMap id="follow_result" type="com.tang.blog.Unity.Follow">
+        <result column="type" jdbcType="INTEGER" property="type"></result>
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="follow_id" jdbcType="INTEGER" property="follow_id"></result>
+        <result column="by_follow_id" jdbcType="INTEGER" property="by_follow_id"></result>
+
+        <collection property="user" ofType="com.tang.blog.Unity.User">
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="username" jdbcType="VARCHAR" property="username"></result>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+            <result column="password" jdbcType="VARCHAR" property="password"></result>
+            <result column="truename" jdbcType="VARCHAR" property="truename"></result>
+            <result column="age" jdbcType="VARCHAR" property="age"></result>
+            <result column="birthday" jdbcType="VARCHAR" property="birthday"></result>
+            <result column="job" jdbcType="VARCHAR" property="job"></result>
+            <result column="sex" jdbcType="VARCHAR" property="sex"></result>
+            <result column="work" jdbcType="VARCHAR" property="work"></result>
+            <result column="place" jdbcType="VARCHAR" property="place"></result>
+            <result column="remark" jdbcType="VARCHAR" property="remark"></result>
+        </collection>
+
+        <collection property="img" ofType="com.tang.blog.Unity.Img">
+            <result column="img_name" jdbcType="VARCHAR" property="img_name"></result>
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="img_id" jdbcType="INTEGER" property="img_id"></result>
+        </collection>
+    </resultMap>
+    <select id="login" resultMap="lo">
+        SELECT * from user where username=#{name}
+    </select>
+    <insert id="register" parameterType="java.lang.String">
+        INSERT into user(username)
+        VALUES (#{name})
+    </insert>
+
+    <insert id="registerTest" parameterType="java.lang.String">
+        INSERT into user(username,password)
+        VALUES (#{name},#{password})
+    </insert>
+
+    <select id="selectByName" resultType="INTEGER">
+        SELECT count(id) FROM USER WHERE
+            username=#{name}
+    </select>
+    
+    <select id="SelectByPhone" resultMap="lo">
+        SELECT * from user where username=#{phone}
+    </select>
+
+    <update id="updateMessage" parameterType="com.tang.blog.Unity.User">
+        UPDATE USER SET nickname=#{nickname,jdbcType=VARCHAR},truename=#{truename,jdbcType=VARCHAR},job=#{job,jdbcType=VARCHAR},place=#{place,jdbcType=VARCHAR},
+        birthday=#{birthday,jdbcType=VARCHAR},remark=#{remark,jdbcType=VARCHAR},sex=#{sex,jdbcType=VARCHAR},
+        work=#{work,jdbcType=VARCHAR} WHERE username=#{name}
+    </update>
+
+    <select id="selectUserByName" resultType="INTEGER">
+        SELECT COUNT(username) from img where username=#{name}
+    </select>
+
+    <insert id="insertImage" parameterType="com.tang.blog.Unity.Img">
+        INSERT into img(img_id,img_name)
+        VALUES (#{img_id},#{img_name})
+    </insert>
+
+    <update id="insertImageByName">
+        UPDATE img set img_name=#{img_name}
+        where username=#{username}
+    </update>
+
+    <select id="selectImageName" resultType="STRING">
+        SELECT img_name from img where img_id=#{img_id}
+    </select>
+    
+    <insert id="InsertArticle" parameterType="com.tang.blog.Unity.Article">
+        INSERT INTO article(article_id,article_name,content,label,sort,blog_sort,is_private)
+        VALUES (#{article_id},#{article_name},#{content},#{label},#{sort},#{blog_sort},#{is_private})
+    </insert>
+
+    <select id="selectNickname" resultType="String">
+        SELECT DISTINCT nickname from user where username=#{name}
+    </select>
+    
+    <select id="selectMyFollow" resultMap="follow_result">
+        SELECT *FROM img,`user`,follow WHERE follow.follow_id=#{follow_id} AND follow.`follow_id`=user.`id`
+                                             AND follow.`follow_id`=img.`img_id`;
+    </select>
+
+    <select id="selectFansCount" resultType="INTEGER">
+        SELECT COUNT(id) FROM follow WHERE follow.`by_follow_id` IN(SELECT user.`id` FROM USER WHERE
+            user.`username`=#{username})
+    </select>
+
+    <select id="selectFollowCount" resultType="INTEGER">
+        SELECT COUNT(id) FROM follow WHERE follow.`follow_id` IN(SELECT user.`id` FROM USER WHERE
+            user.`username`=#{username})
+
+    </select>
+
+    <insert id="insertGrade" parameterType="com.tang.blog.Unity.Grade">
+        INSERT into grade(grade_id,grade,score)
+                VALUES (#{grade_id},#{grade},#{score})
+    </insert>
+
+    <insert id="updateVisitInit" parameterType="com.tang.blog.Unity.Visit">
+        INSERT INTO visit(id,by_visitusername)
+        VALUES(#{id},#{username})
+    </insert>
+
+    <select id="selectMaxId" resultType="INTEGER">
+        SELECT MAX(id) from article
+    </select>
+
+    <insert id="initLikeCount" parameterType="com.tang.blog.Unity.Like">
+        INSERT into like(likeid,byuser)
+                VALUES (#{likeid},#{byuser})
+    </insert>
+
+    <insert id="initUserGrade" parameterType="com.tang.blog.Unity.Grade">
+        INSERT into grade(username)
+                VALUES (#{username})
+    </insert>
+
+    <update id="updatePassword" parameterType="com.tang.blog.Unity.User">
+        UPDATE user set password=#{password} where username=#{username}
+    </update>
+
+    <resultMap id="Article_test_result" type="com.tang.blog.Unity.Article">
+        <result column="id" jdbcType="INTEGER" property="id"></result>
+        <result column="article_id" jdbcType="INTEGER" property="article_id"></result>
+        <result column="write_time" jdbcType="TIMESTAMP" property="write_time"></result>
+        <result column="article_name" jdbcType="VARCHAR" property="article_name"></result>
+        <result column="content" jdbcType="VARCHAR" property="content"></result>
+        <result column="label" jdbcType="VARCHAR" property="label"></result>
+        <result column="visit_count" jdbcType="INTEGER" property="visit_count"></result>
+        <result column="sort" jdbcType="VARCHAR" property="sort"></result>
+        <result column="blog_sort" jdbcType="VARCHAR" property="blog_sort"></result>
+        <result column="is_private" jdbcType="VARCHAR" property="is_private"></result>
+
+        <association property="user" javaType="com.tang.blog.Unity.User">
+            <result column="id" jdbcType="INTEGER" property="id"></result>
+            <result column="username" jdbcType="VARCHAR" property="username"></result>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+            <result column="password" jdbcType="VARCHAR" property="password"></result>
+            <result column="truename" jdbcType="VARCHAR" property="truename"></result>
+            <result column="age" jdbcType="VARCHAR" property="age"></result>
+            <result column="birthday" jdbcType="VARCHAR" property="birthday"></result>
+            <result column="job" jdbcType="VARCHAR" property="job"></result>
+            <result column="sex" jdbcType="VARCHAR" property="sex"></result>
+            <result column="work" jdbcType="VARCHAR" property="work"></result>
+            <result column="place" jdbcType="VARCHAR" property="place"></result>
+            <result column="remark" jdbcType="VARCHAR" property="remark"></result>
+        </association>
+    </resultMap>
+    <select id="selectlianhe" resultMap="Article_test_result">
+        SELECT  user.`remark`,user.`nickname`,user.`place`,article.`article_name`,article.article_id,article.`blog_sort`
+        FROM article,`user` WHERE user.`username`=#{username} AND user.`id`=article.`article_id`;
+    </select>
+
+    <select id="selectUserByArticleId" resultType="com.tang.blog.Unity.User">
+        SELECT *from user where user.id=#{article_id}
+    </select>
+
+    <select id="selectUserByNoteId" resultMap="lo">
+        SELECT *from user where user.id=#{note_id}
+    </select>
+</mapper>

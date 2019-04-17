@@ -1,0 +1,17 @@
+自己的授权码：   3T54FFdU5WPtQmPXnK68f_5BFGBy2AAizZgXP43PasD
+第一步     启动客户端在E:\package\ngroq\ngrok.exe  输入ngrok authtoken 3T54FFdU5WPtQmPXnK68f_5BFGBy2AAizZgXP43PasD
+第二步     输入ngrok http 8080
+在浏览器输入  http://127.0.0.1:4040
+电脑每次启动都不一样
+
+
+微信测试公众号https://www.cnblogs.com/baiyunchen/p/3833340.html登录自己的微信
+
+
+
+微信公众号平台 https://mp.weixin.qq.com/wxopen/initprofile?action=home&lang=zh_CN&token=1164811228
+
+小程序秘钥  0659fbdf67ddf517b79f0279434c9355
+
+
+apple id wx588aa09a655124c9
